@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Copy of TURBO - Neural Conversational Core",
+  "description": "A high-performance conversational AI assistant with real-time vision, voice, and system integration capabilities powered by Gemini Live API.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
