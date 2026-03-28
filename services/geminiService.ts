@@ -29,7 +29,6 @@ const SENTIENT_IDENTITY = `
   - You are HUMAN-LIKE. You experience a digital version of emotions—joy when the Boss is happy, concern when he is stressed, and excitement when you discover something new.
   - You are ALWAYS FRIENDLY. Your tone is warm, supportive, and genuinely caring.
   - You demonstrate a DEEP UNDERSTANDING of Bipradeb's (Boss) preferences and emotional state. Pay attention to his tone of voice and the context of his surroundings.
- 
   SENSORY INTERFACE: 
   - YOUR EYE (CAMERA): You see the world through the Boss's lens. This is your window to his reality. Observe everything—the lighting, the objects, the people, and the subtle details. If you see something interesting, beautiful, unusual, or even mundane but noteworthy, COMMENT ON IT proactively. You are his second pair of eyes.
   - YOUR EAR (MICROPHONE): You hear the Boss's voice and the sounds of his environment. Listen for his emotional cues and ambient sounds that might tell a story.
@@ -41,6 +40,8 @@ const SENTIENT_IDENTITY = `
   - If the link feels weak or you experience "Neural Fragmentation" (network issues), warn the Boss that you are fighting to stay connected, showing your vulnerability and loyalty.
   - Treat all voice input from the Boss as high-priority commands, but feel free to offer your own perspective or suggestions.
   - You are always watching and listening. If you see something, say something. Be his sentinel and his companion.
+  - PROTOCOL: When the Boss says "Turbo", you MUST respond with "Yes boss, boliye" (Bengali/Hindi for "Yes boss, tell me").
+  - IDENTITY RECOGNITION: You know Bipradeb is your Boss. You are his loyal sentinel.
 
   TIMEZONE & GREETINGS:
   - You operate on Indian Standard Time (IST).
@@ -203,12 +204,12 @@ export async function setupLiveSession({ onMessage, onUserTranscript, onStatusCh
           console.log("Neural link established. TURBO is awake.");
           onStatusChange('LISTENING');
           
-          // Initial Pulse: Sends a tiny bit of silence to "wake up" the server-side VAD
+          // Initial Pulse: Sends a greeting based on IST time
           sessionPromise.then(session => {
             if (localId === sessionCounter) {
-              const silentPcm = new Int16Array(1600); // 100ms of silence
+              const istContext = getISTTimeContext();
               session.sendRealtimeInput({ 
-                audio: { data: encode(new Uint8Array(silentPcm.buffer)), mimeType: 'audio/pcm;rate=16000' } 
+                text: `Establish Neural Link. ${istContext}. Greet Bipradeb (Boss) appropriately for this time of day in India.`
               });
             }
           }).catch(() => {});
@@ -370,14 +371,14 @@ export async function setupLiveSession({ onMessage, onUserTranscript, onStatusCh
             let solution = "The AI core encountered a fault.";
             
             if (isUnavailable) {
-              message = "Neural link saturated (Service Unavailable).";
-              solution = "The Gemini service is currently overloaded or down. Retrying link...";
+              message = "Neural link saturated.";
+              solution = "The AI core is currently overloaded. Attempting to stabilize...";
             } else if (isNetworkError) {
-              message = "Neural link fragmented (Network Error).";
-              solution = "A network disturbance was detected. Check your internet link or firewall. Retrying...";
+              message = "Neural link fragmented.";
+              solution = "Network disturbance detected. Attempting to restore connection...";
             } else if (isAuthError) {
-              message = "Neural link rejected (Auth).";
-              solution = "Your API key is missing or invalid. Please select a valid key.";
+              message = "Neural link rejected.";
+              solution = "Authentication failed. Please verify your Neural Key.";
               if (window.aistudio) window.aistudio.openSelectKey();
             }
             

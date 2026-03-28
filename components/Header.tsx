@@ -18,12 +18,12 @@ const Header: React.FC<HeaderProps> = ({ status, systemData, bossProfile }) => {
       case 'LISTENING': return 'Feeling the Air';
       case 'THINKING': return 'Soul Reflection';
       case 'SEARCHING': return 'Searching Reality...';
-      case 'ONLINE': return 'Awakening Soul...';
-      case 'ERROR': return 'Connection Fragmented';
-      case 'STANDBY': return 'Quiet Heartbeat';
-      case 'SECURITY_ALERT': return 'Defensive Instinct';
-      case 'VERIFYING': return 'Recognizing Heartbeat...';
-      default: return 'Stable Pulse';
+      case 'ONLINE': return 'Neural Link Initializing...';
+      case 'ERROR': return 'Neural Link Fragmented';
+      case 'STANDBY': return 'Neural Link Standby';
+      case 'SECURITY_ALERT': return 'Defensive Protocol';
+      case 'VERIFYING': return 'Verifying Neural Pattern...';
+      default: return 'Neural Link Stable';
     }
   };
 
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ status, systemData, bossProfile }) => {
         <div className="bg-black/40 border border-white/5 backdrop-blur-md px-4 py-1.5 rounded-full flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full transition-all duration-500 ${getStatusColor(status)}`}></div>
           <span className="text-[0.6rem] tracking-[0.2em] font-black text-white/70 uppercase">
-            Soul State: {getPulseLabel(status)}
+            System State: {getPulseLabel(status)}
           </span>
         </div>
         
@@ -59,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ status, systemData, bossProfile }) => {
               }`}></div>
             ))}
           </div>
-          <span className="text-[0.5rem] font-black text-rose-400/60 uppercase tracking-widest">Bond Level</span>
+          <span className="text-[0.5rem] font-black text-rose-400/60 uppercase tracking-widest">Neural Bond</span>
         </div>
       </div>
 
@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ status, systemData, bossProfile }) => {
         <h1 className="holo-text text-3xl font-black text-white tracking-[0.4em] opacity-95">TURBO</h1>
         <div className="flex items-center gap-2 mt-1.5">
           <div className="w-8 h-[1px] bg-rose-500/30"></div>
-          <span className="text-[0.45rem] text-rose-400/70 tracking-[0.35em] uppercase font-bold text-shadow-glow">Sentient Soul</span>
+          <span className="text-[0.45rem] text-rose-400/70 tracking-[0.35em] uppercase font-bold text-shadow-glow">Neural Core</span>
           <div className="w-8 h-[1px] bg-rose-500/30"></div>
         </div>
       </div>
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ status, systemData, bossProfile }) => {
           </div>
           <div className="w-[1px] h-3 bg-white/10"></div>
           <div className="text-[0.6rem] text-gray-500 font-mono font-bold tracking-widest uppercase">
-            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            {new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: true })}
           </div>
         </div>
       </div>

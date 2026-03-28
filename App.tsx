@@ -93,8 +93,8 @@ const App: React.FC = () => {
         const handlePermissionChange = () => {
           if (mic.state === 'denied' || cam.state === 'denied') {
             setErrorLog({ 
-              message: "Neural Link Blocked", 
-              solution: "Permissions are permanently denied. Please click the lock icon in your address bar to reset them." 
+              message: "Neural Link Access Required", 
+              solution: "Camera or Microphone access is restricted. Please check your browser settings and grant permissions to enable the link." 
             });
             setStatus('ERROR');
           }
@@ -310,7 +310,7 @@ const App: React.FC = () => {
         {(errorLog || status === 'RECONNECTING' || status === 'SEARCHING') && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-32 bg-rose-950/60 border border-rose-500/30 px-8 py-4 rounded-xl text-rose-400 backdrop-blur-xl z-50 flex flex-col items-center gap-3 min-w-[320px] shadow-[0_0_50px_rgba(0,0,0,0.5)]">
             <div className="text-xs font-black uppercase tracking-[0.2em] animate-pulse">
-              {status === 'RECONNECTING' ? "Re-connecting Neural Link..." : status === 'SEARCHING' ? "Tapping External Reality..." : errorLog?.message}
+              {status === 'RECONNECTING' ? "Restoring Neural Connection..." : status === 'SEARCHING' ? "Tapping External Reality..." : errorLog?.message}
             </div>
             {errorLog?.solution && (
               <div className="text-[0.6rem] text-rose-300/60 font-medium normal-case tracking-normal text-center max-w-[250px]">
